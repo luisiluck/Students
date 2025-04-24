@@ -1,0 +1,23 @@
+[
+  {
+    "dni": "34567890",
+    "name": "Laura",
+    "surname": "Fernández",
+    "Birthday": "1998-05-14",
+    "phone": "1122334455"
+  },
+  {
+    "dni": "45678901",
+    "name": "Marcos",
+    "surname": "García",
+    "Birthday": "2000-09-21",
+    "phone": "1133445566"
+  },
+  {
+    "dni": "56789012",
+    "name": "Elena",
+    "surname": "Pérez",
+    "Birthday": "1995-12-01",
+    "phone": "1144556677"
+  }
+]
