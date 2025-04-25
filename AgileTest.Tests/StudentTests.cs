@@ -1,5 +1,6 @@
 using AgileTest.Common.Models;
 using System.Collections.Generic;
+using System.Net;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -50,11 +51,31 @@ namespace AgileTest.Tests.Core
         }
 
         [Theory]
-        [ClassData(typeof(TestData.StudentCreateData))]
+        [ClassData(typeof(TestData.StudentCreateDataOk))]
         public async void ITStudentPostSuccess(StudentCreateModel student)
         {
-            var response = await Post<StudentModel>(ApiEndpoints.STUDENT_GET_ALL, student);
+            var response = await Post(ApiEndpoints.STUDENT_GET_ALL, student);
             Assert.NotNull(response);
+            Assert.True(response.IsSuccessStatusCode, "Incorrect response, expected success");
+            
+            var model = await DeserializeJSON<StudentModel>(response);
+
+            Assert.NotNull(model);
+            Assert.Equal(student.DNI,model.DNI);
+            Assert.Equal(student.Name, model.Name);
+            Assert.Equal(student.Surname, model.Surname);
+        }
+        
+        [Theory]
+        [ClassData(typeof(TestData.StudentCreateDataFail))]
+        public async void ITStudentPostFail(StudentCreateModel student, string message)
+        {
+            var response = await Post(ApiEndpoints.STUDENT_GET_ALL, student);
+            Assert.NotNull(response);
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+
+            var resMessage = await response.Content.ReadAsStringAsync();
+            Assert.Contains(message, resMessage);
         }
     }
 }

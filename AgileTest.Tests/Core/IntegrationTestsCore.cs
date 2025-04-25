@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
 using Xunit.Abstractions;
 using Newtonsoft.Json;
@@ -71,6 +72,17 @@ namespace AgileTest.Tests.Core
             response.EnsureSuccessStatusCode();
 
             return await DeserializeJSON<T>(response);
+        }
+
+        public async Task<HttpResponseMessage> Post(string url, object request)
+        {
+            var json = JsonConvert.SerializeObject(request);
+
+            var response = await Client.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json"));
+
+            Output.WriteLine(await response.Content.ReadAsStringAsync());
+
+            return response;
         }
 
         public async Task<T> Put<T>(string url, object request)

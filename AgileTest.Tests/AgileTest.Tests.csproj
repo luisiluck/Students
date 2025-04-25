@@ -28,6 +28,9 @@
     <None Update="Core\RawData\StudentCreate.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Core\RawData\StudentCreateFail.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

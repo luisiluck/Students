@@ -1,7 +1,9 @@
-﻿using AgileTest.Common.Models;
+﻿using System;
+using AgileTest.Common.Models;
 using AgileTest.Logic;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AgileTest.Controllers
 {
@@ -52,11 +54,16 @@ namespace AgileTest.Controllers
         /// Creates a new user
         /// </summary>
         [HttpPost]
-        public StudentModel Create(StudentCreateModel model)
+        public IActionResult Create(StudentCreateModel model)
         {
-            var result = StudentBL.Create(model);
-
-            return result;
+            try
+            {
+                return Ok(StudentBL.Create(model));
+            }
+            catch (ValidationException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
