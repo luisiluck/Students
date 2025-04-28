@@ -387,7 +387,7 @@
 
 ## Exercise 4 - Integration Test creation
 
-### [Tests]("AgileTest.Tests/StudentTests.cs")
+### [Tests](AgileTest.Tests/StudentTests.cs)
 
 ## Exercise 5
 
@@ -465,4 +465,4 @@
 
 ## Exercise 6 - Automated tests Plan creation
 
-### [Acceptance Tests]("./AgileTest.AcceptanceTests")
+### [Acceptance Tests](AgileTest.AcceptanceTests)
